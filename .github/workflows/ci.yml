@@ -36,3 +36,10 @@ jobs:
           path: |
             target/surefire-reports/
             target/site/
+
+      - name: Upload Cucumber HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-html
+          path: target/cucumber-report.html
