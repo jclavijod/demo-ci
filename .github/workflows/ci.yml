@@ -24,9 +24,15 @@ jobs:
       - name: Build and run tests
         run: mvn -B clean test
 
-      - name: Publish Surefire test reports
+      - name: Generate test report (HTML)
+        if: always()
+        run: mvn -B surefire-report:report-only
+
+      - name: Publish test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: surefire-reports
-          path: target/surefire-reports
+          name: test-reports
+          path: |
+            target/surefire-reports/
+            target/site/
